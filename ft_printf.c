@@ -6,22 +6,14 @@
 /*   By: sbueno-s <sbueno-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:22:09 by sbueno-s          #+#    #+#             */
-/*   Updated: 2023/10/28 16:37:49 by sbueno-s         ###   ########.fr       */
+/*   Updated: 2023/10/29 16:03:56 by sbueno-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-/* void ft_putchar(int c, int *count)
-{
-	write(1, &c, 1);
-	*count += 1;
-} */
 static void	ft_arg_type(va_list args,const char *c, int *count)
 {
-	char *str[2];
-	str[0] = "0123456789abcdef";
-	str[1] = "0123456789ABCDEF";
 	if (*c == 'c')
 		ft_putchar(va_arg(args, int), count);
 	else if (*c == 's')
@@ -30,16 +22,16 @@ static void	ft_arg_type(va_list args,const char *c, int *count)
 	{
 		write(1, "0x", 2);
 		*count += 2;
-		ft_putptr(va_arg(args, unsigned long), count, str[0]);
+		ft_puthex(va_arg(args, unsigned long), count, HEX_LOWER);
 	}
 	else if (*c == 'd' || *c == 'i')
 		ft_putnbr(va_arg(args, int), count);
 	else if (*c == 'u')
 		ft_putunint(va_arg(args, unsigned int), count);
 	else if (*c == 'x')
-		ft_putptr((unsigned long)va_arg(args, int), count, str[0]);
+		ft_puthex((unsigned long)va_arg(args, int), count, HEX_LOWER);
 	else if (*c == 'X')
-		ft_putptr((unsigned long)va_arg(args, int), count, str[1]);
+		ft_puthex((unsigned long)va_arg(args, int), count, HEX_UPPER);
 	else if (*c == '%')
 		ft_putchar('%', count);
 }
