@@ -5,9 +5,9 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c ft_putchar.c ft_putstr.c \
-	ft_puthex.c ft_putnbr.c ft_putunint.c \
+	ft_putbase.c ft_putnbr.c ft_putunint.c ft_putmem.c \
 
-OBJS = $(SRCS: .c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
@@ -17,7 +17,8 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
-clean: rm -f $(OBJS)
+clean:
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
